@@ -1,0 +1,39 @@
+# Build and intermediate files
+*.obj
+*.pdb
+*.exe
+*.ilk
+*.idb
+*.log
+*.tlog
+*.pch
+*.aps
+*.ncb
+*.suo
+*.user
+*.opensdf
+*.sdf
+*.ipch
+*.db
+*.cachefile
+*.VC.db
+*.VC.opendb
+*.dll
+
+# Folders
+[Bb]uild*/
+[Dd]ebug*/
+[Rr]elease*/
+.x64/
+.ipch/
+.vs/
+out/
+bin/
+obj/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# External dependencies (optional)
+External/
