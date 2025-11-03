@@ -1,5 +1,4 @@
-#ifndef SHADER_H
-#define SHADER_H
+#pragma once
 
 #include <string>
 #include <glm/glm.hpp>
@@ -21,5 +20,3 @@ private:
     static std::string readFile(const char* filePath);
     static void checkCompileErrors(unsigned int shader, const std::string& type);
 };
-
-#endif

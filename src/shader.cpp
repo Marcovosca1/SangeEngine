@@ -1,19 +1,19 @@
 #include "shader.h"
-#include <glad/glad.h> // or GLEW if you use that
+#include <glad/glad.h>
 #include <fstream>
 #include <sstream>
 #include <iostream>
 
 Shader::Shader(const char* vertexPath, const char* fragmentPath)
 {
-    // 1. Read shader source from files
+    // read shader source from files
     std::string vertexCode = readFile(vertexPath);
     std::string fragmentCode = readFile(fragmentPath);
 
     const char* vShaderCode = vertexCode.c_str();
     const char* fShaderCode = fragmentCode.c_str();
 
-    // 2. Compile shaders
+    // compile shaders
     unsigned int vertex, fragment;
     int success;
     char infoLog[512];
@@ -28,14 +28,14 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath)
     glCompileShader(fragment);
     checkCompileErrors(fragment, "FRAGMENT");
 
-    // 3. Link shaders
+    // link shaders
     ID = glCreateProgram();
     glAttachShader(ID, vertex);
     glAttachShader(ID, fragment);
     glLinkProgram(ID);
     checkCompileErrors(ID, "PROGRAM");
 
-    // Delete shader objects after linking
+    // delete shader objects after linking
     glDeleteShader(vertex);
     glDeleteShader(fragment);
 }
