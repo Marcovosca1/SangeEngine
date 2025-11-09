@@ -1,4 +1,5 @@
 #include "mesh.h"
+#include "model.h"
 
 Mesh::Mesh(const Vertex vertices) : data(vertices)
 {

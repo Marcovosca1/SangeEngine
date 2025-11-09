@@ -4,14 +4,14 @@
 #include "camera.h"
 #include "shader.h"
 #include "texture.h"
-#include "mesh.h"
+#include "model.h"
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1920;
+const unsigned int SCR_HEIGHT = 1080;
 
 bool wireframe = false;
 
@@ -92,122 +92,7 @@ int main()
     Texture containerTexture("textures/container.jpg");
     Texture awesomefaceTexture("textures/awesomeface.png");
 
-    Vertex cube;
-
-	//vertex data
-    cube.position = {
-        // Front face
-        -0.5f,  0.5f,  0.5f,  // top-left
-         0.5f,  0.5f,  0.5f,  // top-right
-        -0.5f, -0.5f,  0.5f,  // bottom-left
-         0.5f, -0.5f,  0.5f,  // bottom-right
-
-        // Back face
-         0.5f,  0.5f, -0.5f,  // top-left
-        -0.5f,  0.5f, -0.5f,  // top-right
-         0.5f, -0.5f, -0.5f,  // bottom-left
-        -0.5f, -0.5f, -0.5f,  // bottom-right
-
-        // Left face
-        -0.5f,  0.5f, -0.5f,  // top-left
-        -0.5f,  0.5f,  0.5f,  // top-right
-        -0.5f, -0.5f, -0.5f,  // bottom-left
-        -0.5f, -0.5f,  0.5f,  // bottom-right
-
-        // Right face
-        0.5f,  0.5f,  0.5f,  // top-left
-        0.5f,  0.5f, -0.5f,  // top-right
-        0.5f, -0.5f,  0.5f,  // bottom-left
-        0.5f, -0.5f, -0.5f,  // bottom-right
-
-        // Top face
-        -0.5f,  0.5f, -0.5f,  // top-left
-         0.5f,  0.5f, -0.5f,  // top-right
-        -0.5f,  0.5f,  0.5f,  // bottom-left
-         0.5f,  0.5f,  0.5f,  // bottom-right
-
-        // Bottom face
-        -0.5f, -0.5f,  0.5f,  // top-left
-         0.5f, -0.5f,  0.5f,  // top-right
-        -0.5f, -0.5f, -0.5f,  // bottom-left
-         0.5f, -0.5f, -0.5f   // bottom-right
-    };
-
-    cube.color = {
-        // Front
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,
-        // Back
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,
-        // Left
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,
-        // Right
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,
-        // Top
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f,
-        // Bottom
-        1.0f, 0.0f, 0.0f,
-        0.0f, 1.0f, 0.0f,
-        0.0f, 0.0f, 1.0f,
-        1.0f, 1.0f, 0.0f
-    };
-
-    cube.texCoords = {
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f,
-
-        0.0f, 1.0f,
-        1.0f, 1.0f,
-        0.0f, 0.0f,
-        1.0f, 0.0f
-    };
-
-    cube.indices = {
-        0, 1, 2,  1, 3, 2,        // Front face
-        4, 5, 6,  5, 7, 6,        // Back face
-        8, 9,10,  9,11,10,        // Left face
-       12,13,14, 13,15,14,        // Right face
-       16,17,18, 17,19,18,        // Top face
-	   20,21,22, 21,23,22         // Bottom face
-    };
-
-	Mesh cubeMesh(cube);
+    Model model("models/spider.obj");
 
     defaultShader.use();
 
@@ -236,6 +121,14 @@ int main()
             camera.ProcessKeyboard(LEFT, deltaTime);
         if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
             camera.ProcessKeyboard(RIGHT, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+			camera.ProcessKeyboard(UP, deltaTime);
+		if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+			camera.ProcessKeyboard(DOWN, deltaTime);
+        if (glfwGetKey(window, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS)
+            camera.MovementSpeed = 5.0f;
+        else
+			camera.MovementSpeed = 2.5f;
 
         // render
 		if (wireframe)
@@ -254,36 +147,21 @@ int main()
 		glm::mat4 projection = camera.GetProjectionMatrix((float)SCR_WIDTH / (float)SCR_HEIGHT);
 		int modelLoc = glGetUniformLocation(defaultShader.ID, "model");
 
-        glm::vec3 cubePositions[] = {
-            glm::vec3(0.0f,  0.0f,  0.0f),
-            glm::vec3(2.0f,  5.0f, -15.0f),
-            glm::vec3(-1.5f, -2.2f, -2.5f),
-            glm::vec3(-3.8f, -2.0f, -12.3f),
-            glm::vec3(2.4f, -0.4f, -3.5f),
-            glm::vec3(-1.7f,  3.0f, -7.5f),
-            glm::vec3(1.3f, -2.0f, -2.5f),
-            glm::vec3(1.5f,  2.0f, -2.5f),
-            glm::vec3(1.5f,  0.2f, -1.5f),
-            glm::vec3(-1.3f,  1.0f, -1.5f)
-        };
-
-        for (unsigned int i = 0; i < 10; i++) {
-			float angle = 20.0f * i + (timeValue * 50.0f);
-
-            glm::mat4 model = glm::mat4(1.0f);
-			model = glm::translate(model, cubePositions[i]);
-			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
-            defaultShader.setMat4("model", model);
-            cubeMesh.draw();
-        }
-
 		defaultShader.setMat4("view", view);
 		defaultShader.setMat4("projection", projection);
 
 		defaultShader.setFloat("time", timeValue);
 
+		//draw the model
+		glm::mat4 modelMat = glm::mat4(1.0f);
+		modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -3.0f));
+		modelMat = glm::scale(modelMat, glm::vec3(0.2f, 0.2f, 0.2f));
+		defaultShader.setMat4("model", modelMat);
+
         containerTexture.bind(0);
         awesomefaceTexture.bind(1);
+
+		model.draw();
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         glfwSwapBuffers(window);
