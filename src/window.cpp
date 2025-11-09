@@ -29,6 +29,8 @@ void Window::Create()
 	}
 
 	glfwMakeContextCurrent(m_Handle);
+	glfwSetKeyCallback(m_Handle, Window::key_callback);
+
 }
 
 void Window::Destroy()
@@ -55,4 +57,31 @@ glm::vec2 Window::GetFrameBufferSize()
 bool Window::ShouldClose() const
 {
 	return glfwWindowShouldClose(m_Handle) != 0;
+}
+
+void Window::RegisterObserver(InputSystem& observer)
+{
+	//m_Observers.push_back(observer);
+}
+
+void Window::RemoveObserver(InputSystem& observer)
+{
+	//m_Observers.erase(std::remove(m_Observers.begin(), m_Observers.end(), observer), m_Observers.end());
+}
+
+void Window::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	
+}
+
+void Window::mouseClick_callback(GLFWwindow* window, int button, int action, int mods)
+{
+}
+
+void Window::mouseMove_callback(GLFWwindow* window, double xpos, double ypos)
+{
+}
+
+void Window::scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
 }

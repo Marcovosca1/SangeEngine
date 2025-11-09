@@ -141,6 +141,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\inputSystem.cpp" />
+    <ClCompile Include="src\event.cpp" />
+    <ClCompile Include="src\appLayer.cpp" />
+    <ClCompile Include="src\layer.cpp" />
     <ClCompile Include="src\application.cpp" />
     <ClCompile Include="src\camera.cpp" />
     <ClCompile Include="External\src\glad.c" />
@@ -154,11 +158,15 @@
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\event.h" />
+    <ClInclude Include="include\appLayer.h" />
     <ClInclude Include="include\application.h" />
     <ClInclude Include="include\camera.h" />
     <ClInclude Include="include\texture.h" />
     <ClInclude Include="include\mesh.h" />
     <ClInclude Include="include\window.h" />
+    <ClInclude Include="include\layer.h" />
+    <ClInclude Include="include\inputSystem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
